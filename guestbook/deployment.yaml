@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: guestbook
-        image: nginx:latest
+        image: registry.cn-hangzhou.aliyuncs.com/library/nginx:latest
         ports:
         - containerPort: 80

@@ -15,5 +15,6 @@ spec:
       containers:
       - name: guestbook
         image: nginx:alpine
+        imagePullPolicy: IfNotPresent  # 添加这行！
         ports:
         - containerPort: 80

@@ -1,3 +1,14 @@
+# git
+```sh
+git init
+git add .
+git commit -m "first commit"
+git checkout -b argocd_monitor
+git remote add origin git@github.com:lushiheng123/Code-for-Argo.git
+git push -u origin argocd_monitor
+```
+
+
 # 结构说明
 ![alt text](README_Images/README/{2665AA99-66BA-423D-83D0-0DAF19B5AB2B}.png)
 

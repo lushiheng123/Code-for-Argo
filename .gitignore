@@ -6,4 +6,4 @@ base/
 # 忽略临时文件
 *.log
 *.tmp
-.DS_Store
+.DS_Storemonitoring/charts/

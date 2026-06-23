@@ -8,12 +8,16 @@ spec:
   
   source:
     repoURL: https://github.com/lushiheng123/Code-for-Argo.git
-    targetRevision: argocd_prometheus  # 改为 argocd_prometheus 分支
-    path: .  # 当前目录就是 argocd_prometheus
+    targetRevision: argocd_monitor
+    path: monitoring
     
     helm:
       valueFiles:
-      - monitoring/values/custom-values.yaml  # 修正路径
+      - values/custom-values.yaml
+      # 添加依赖更新
+      parameters:
+      - name: "global.imageRegistry"
+        value: "docker.io"
     
   destination:
     server: https://kubernetes.default.svc

@@ -7,25 +7,8 @@ kubeProxy:
   enabled: false
 kubeEtcd:
   enabled: false
-alertmanager:
-  enabled: false
-prometheus-node-exporter:
-  enabled: false
-kube-state-metrics:
-  enabled: false
-defaultRules:
-  rules:
-    etcd: false
-    kubeControllerManager: false
-    kubeScheduler: false
-    kubeProxy: false
 
-# Prometheus 配置
-prometheus:
-  prometheusSpec:
-    storageSpec: null
-
-# AlertManager 配置
+# ⚠️ 注意：alertmanager 只出现一次
 alertmanager:
   enabled: true
   alertmanagerSpec:
@@ -42,6 +25,19 @@ alertmanager:
             requests:
               storage: 10Gi
 
+# ✅ 打开 node-exporter（采集节点指标）
+prometheus-node-exporter:
+  enabled: true
+
+# ✅ 打开 kube-state-metrics（采集集群状态指标）
+kube-state-metrics:
+  enabled: true
+
+# Prometheus 配置
+prometheus:
+  prometheusSpec:
+    storageSpec: null
+
 # Grafana 配置
 grafana:
   enabled: true
@@ -50,9 +46,15 @@ grafana:
     enabled: true
     storageClassName: standard
     size: 10Gi
-  # ✅ 添加默认 dashboards
   defaultDashboardsEnabled: true
-  # ✅ 允许通过 ingress/service 访问
   service:
     type: NodePort
     nodePort: 30300
+
+# 默认规则
+defaultRules:
+  rules:
+    etcd: false
+    kubeControllerManager: false
+    kubeScheduler: false
+    kubeProxy: false

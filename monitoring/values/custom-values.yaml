@@ -7,7 +7,12 @@ kubeProxy:
   enabled: false
 kubeEtcd:
   enabled: false
-
+alertmanager:
+  enabled: false
+prometheus-node-exporter:
+  enabled: false
+kube-state-metrics:
+  enabled: false
 defaultRules:
   rules:
     etcd: false
@@ -17,23 +22,8 @@ defaultRules:
 
 # Prometheus 配置
 prometheus:
-  enabled: true
   prometheusSpec:
-    resources:
-      requests:
-        memory: 2Gi
-        cpu: 500m
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: standard
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 50Gi
-    # ✅ 添加 scrape 间隔
-    scrapeInterval: 30s
-    evaluationInterval: 30s
+    storageSpec: null
 
 # AlertManager 配置
 alertmanager:

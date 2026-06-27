@@ -14,10 +14,7 @@ spec:
     helm:
       valueFiles:
       - values/custom-values.yaml
-      # 添加依赖更新
-      parameters:
-      - name: "global.imageRegistry"
-        value: "docker.io"
+      # ⚠️ 删除 parameters 部分，不需要这个
     
   destination:
     server: https://kubernetes.default.svc
@@ -27,10 +24,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: false
     syncOptions:
     - CreateNamespace=true
     - PruneLast=true
+    - ServerSideApply=true  # ✅ 推荐添加，避免 CRD 冲突
     retry:
       limit: 5
       backoff:

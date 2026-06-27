@@ -1,5 +1,4 @@
-# argocd-apps/monitoring/values/custom-values.yaml
-# 只放你需要覆盖的配置
+# 关闭不需要的组件（如果你在 K3s 或非完整集群）
 kubeControllerManager:
   enabled: false
 kubeScheduler:
@@ -16,7 +15,9 @@ defaultRules:
     kubeScheduler: false
     kubeProxy: false
 
+# Prometheus 配置
 prometheus:
+  enabled: true
   prometheusSpec:
     resources:
       requests:
@@ -30,8 +31,13 @@ prometheus:
           resources:
             requests:
               storage: 50Gi
+    # ✅ 添加 scrape 间隔
+    scrapeInterval: 30s
+    evaluationInterval: 30s
 
+# AlertManager 配置
 alertmanager:
+  enabled: true
   alertmanagerSpec:
     resources:
       requests:
@@ -46,9 +52,17 @@ alertmanager:
             requests:
               storage: 10Gi
 
+# Grafana 配置
 grafana:
+  enabled: true
   adminPassword: "admin123"
   persistence:
     enabled: true
     storageClassName: standard
     size: 10Gi
+  # ✅ 添加默认 dashboards
+  defaultDashboardsEnabled: true
+  # ✅ 允许通过 ingress/service 访问
+  service:
+    type: NodePort
+    nodePort: 30300

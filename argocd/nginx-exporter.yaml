@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-exporter
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/lushiheng123/Code-for-Argo.git
+    path: apps/nginx-exporter
+    targetRevision: argocd_monitor
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nginx-exporter
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

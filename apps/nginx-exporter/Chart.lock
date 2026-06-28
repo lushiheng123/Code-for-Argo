@@ -1,0 +1,6 @@
+dependencies:
+- name: prometheus-nginx-exporter
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 1.22.5
+digest: sha256:7c46b1c7564d90ae3f87bb6f8ae461aba8127872f520fac5e10ae9eac241c558
+generated: "2026-06-27T23:50:33.754774973+08:00"

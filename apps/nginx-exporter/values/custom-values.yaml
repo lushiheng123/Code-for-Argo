@@ -1,0 +1,45 @@
+# 使用子 chart 的 values
+prometheus-nginx-exporter:
+  # 部署配置
+  fullnameOverride: "nginx-exporter"
+  
+  # 副本数
+  replicaCount: 1
+  
+  # 镜像配置
+  image:
+    repository: nginx
+    tag: "1.25.0"
+    pullPolicy: IfNotPresent
+  
+  # 服务配置
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+  
+  # Exporter 配置
+  exporter:
+    image:
+      repository: nginx/nginx-prometheus-exporter
+      tag: "0.11.0"
+      pullPolicy: IfNotPresent
+    port: 9113
+    
+  # 资源限制（练习用，设小一点）
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  
+  # 监控配置
+  serviceMonitor:
+    enabled: true
+    namespace: nginx-exporter
+    interval: 15s
+    scrapeTimeout: 10s
+    labels:
+      release: prometheus

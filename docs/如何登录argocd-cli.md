@@ -5,7 +5,10 @@ argocd login localhost:8080 \
 --password admin123 \
 --insecure
 ```
-
+# 查密码Ol99vaHnw3WBg75i
+```sh
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
 哈哈，终于登录成功了🎉。
 
 其实你这次遇到的问题非常典型，也是很多刚学 Argo CD 的人都会踩的坑。下面我按照**企业排障思路**给你总结，以后遇到 CLI 登录问题基本都可以按这个流程定位。

@@ -38,3 +38,13 @@ argocd app create nginx-exporter \
   --revision nginx-prometheus-exporter \
   --sync-policy automated
 ```
+
+```sh
+argocd app create nginx-exporter \
+  --repo https://github.com/lushiheng123/Code-for-Argo.git \
+  --path . \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace nginx-exporter \
+  --revision nginx-prometheus-exporter \
+  --sync-policy automated
+```
